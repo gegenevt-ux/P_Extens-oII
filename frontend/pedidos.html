@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carvão do Pedro - Pedidos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Menu Lateral (Sidebar) -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <h2>CARVÃO DO BRASA</h2>
+                <span>Área do Comerciante</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="painel.html" class="nav-item">📊 Painel</a>
+                <a href="produtos.html" class="nav-item">📦 Produtos</a>
+                <a href="pedidos.html" class="nav-item active">🛒 Pedidos</a>
+                <a href="comercio.html" class="nav-item">⚙️ Meu Comércio</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>Pedro</p>
+                <small>Administrador</small>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <header class="top-header">
+                <div>
+                    <h1>Gerenciamento de Pedidos</h1>
+                    <p>Acompanhe e atualize o status dos pedidos em tempo real.</p>
+                </div>
+            </header>
+
+            <!-- Tabela Completa de Pedidos -->
+            <section class="recent-orders">
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Cliente / Data</th>
+                                <th>Itens</th>
+                                <th>Modalidade</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>#1048</strong></td>
+                                <td>João da Silva<br><small>03/11/2026 - 10:42</small></td>
+                                <td>1x Carvão 3kg<br><small>1x Acendedor</small></td>
+                                <td>Entrega</td>
+                                <td><span class="badge pending">Pendente</span></td>
+                                <td>R$ 28,00</td>
+                                <td>
+                                    <button class="btn-primary" style="padding: 4px 10px; font-size: 0.8rem;">Avançar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#1047</strong></td>
+                                <td>Maria Oliveira<br><small>03/11/2026 - 09:20</small></td>
+                                <td>2x Carvão Premium 5kg</td>
+                                <td>Retirada</td>
+                                <td><span class="badge ready">Pronto</span></td>
+                                <td>R$ 56,00</td>
+                                <td>
+                                    <button class="btn-action">Detalhes</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
