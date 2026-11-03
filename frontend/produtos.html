@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carvão do Pedro - Produtos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Menu Lateral (Sidebar) -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <h2>CARVÃO DO PEDRO</h2>
+                <span>Área do Comerciante</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="painel.html" class="nav-item">📊 Painel</a>
+                <a href="produtos.html" class="nav-item active">📦 Produtos</a>
+                <a href="pedidos.html" class="nav-item">🛒 Pedidos</a>
+                <a href="comercio.html" class="nav-item">⚙️ Meu Comércio</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>Pedro</p>
+                <small>Administrador</small>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <header class="top-header">
+                <div>
+                    <h1>Produtos</h1>
+                    <p>Gerencie o catálogo de produtos da sua loja.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-primary" id="btn-novo-produto">+ Novo Produto</button>
+                </div>
+            </header>
+
+            <!-- Tabela de Produtos -->
+            <section class="recent-orders">
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Preço</th>
+                                <th>Estoque</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>Carvão Vegetal 3kg</strong><br>
+                                    <small>Ideal para churrasco rápido</small>
+                                </td>
+                                <td>R$ 18,00</td>
+                                <td>25 un.</td>
+                                <td><span class="badge ready">Ativo</span></td>
+                                <td>
+                                    <button class="btn-action">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Acendedor em Gel 500ml</strong><br>
+                                    <small>Acendimento rápido e sem fumaça</small>
+                                </td>
+                                <td>R$ 10,00</td>
+                                <td>12 un.</td>
+                                <td><span class="badge ready">Ativo</span></td>
+                                <td>
+                                    <button class="btn-action">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Saco de Carvão Premium 5kg</strong><br>
+                                    <small>Especial para parrilha</small>
+                                </td>
+                                <td>R$ 28,00</td>
+                                <td>0 un.</td>
+                                <td><span class="badge pending">Indisponível</span></td>
+                                <td>
+                                    <button class="btn-action">Editar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
