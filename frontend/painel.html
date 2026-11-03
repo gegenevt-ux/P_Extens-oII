@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carvão do Pedro - Painel do Comerciante</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Menu Lateral (Sidebar) -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <h2>CARVÃO DO PEDRO</h2>
+                <span>Área do Comerciante</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="painel.html" class="nav-item active">📊 Painel</a>
+                <a href="produtos.html" class="nav-item">📦 Produtos</a>
+                <a href="pedidos.html" class="nav-item">🛒 Pedidos</a>
+                <a href="comercio.html" class="nav-item">⚙️ Meu Comércio</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>Pedro</p>
+                <small>Administrador</small>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <!-- Cabeçalho -->
+            <header class="top-header">
+                <div>
+                    <h1>Painel</h1>
+                    <p>Olá, Pedro. Aqui está o movimento da sua loja.</p>
+                </div>
+                <div class="header-actions">
+                    <a href="index.html" target="_blank" class="btn-secondary">Ver loja</a>
+                </div>
+            </header>
+
+            <!-- Cards de Resumo -->
+            <section class="metrics-grid">
+                <div class="card">
+                    <h3>Pedidos de hoje</h3>
+                    <p class="metric-value">3</p>
+                    <small>1 pendente • 2 em andamento</small>
+                </div>
+                <div class="card">
+                    <h3>Produtos ativos</h3>
+                    <p class="metric-value">2</p>
+                    <small>3 cadastrados • 1 indisponível</small>
+                </div>
+                <div class="card">
+                    <h3>Vendas do mês</h3>
+                    <p class="metric-value">R$ 28,00</p>
+                    <small>Produtos de pedidos concluídos</small>
+                </div>
+            </section>
+
+            <!-- Seção de Pedidos Recentes -->
+            <section class="recent-orders">
+                <div class="section-header">
+                    <h2>Pedidos recentes</h2>
+                    <a href="pedidos.html">Ver todos os pedidos →</a>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Cliente / Data</th>
+                                <th>Modalidade</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#1048</td>
+                                <td>João da Silva<br><small>03/11/2026 - 10:42</small></td>
+                                <td>Entrega</td>
+                                <td><span class="badge pending">Pendente</span></td>
+                                <td>R$ 82,00</td>
+                            </tr>
+                            <tr>
+                                <td>#1047</td>
+                                <td>João da Silva<br><small>03/11/2026 - 09:20</small></td>
+                                <td>Retirada</td>
+                                <td><span class="badge ready">Pronto</span></td>
+                                <td>R$ 74,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
