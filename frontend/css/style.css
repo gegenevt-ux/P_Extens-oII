@@ -97,6 +97,10 @@ body {
     font-weight: 600;
 }
 
+.btn-secondary:hover {
+    background-color: #f0f0f0;
+}
+
 /* Metrics Grid */
 .metrics-grid {
     display: grid;
@@ -191,36 +195,7 @@ th {
     color: #155724;
 }
 
-/* Botões Adicionais */
-.btn-primary {
-    background-color: #ff5722;
-    color: #fff;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.btn-primary:hover {
-    background-color: #e64a19;
-}
-
-.btn-action {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    padding: 4px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85rem;
-}
-
-.btn-action:hover {
-    background-color: #e0e0e0;
-}
-
-/* Estilos para botões e pequenos ajustes */
+/* Botões Principais e de Ação */
 .btn-primary {
     background-color: #ff5722;
     color: #fff;
@@ -305,5 +280,16 @@ th {
 
 .btn-action.btn-danger:hover {
     background-color: #ffebee;
+}
+
+/* Efeito Hover para os Links de Ação em Texto da Tabela */
+.text-btn-editar:hover {
+    text-decoration: underline;
+    color: #e64a19 !important;
+}
+
+.text-btn-excluir:hover {
+    text-decoration: underline;
+    color: #b71c1c !important;
 }
 /* FRONT COMERCIANTE FIM */

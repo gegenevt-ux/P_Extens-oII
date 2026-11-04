@@ -1,21 +1,69 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Usar o ID específico do botão de cadastrar produto
-    const btnCadastrar = document.getElementById('btn-cadastrar-produto');
+    const btnSalvar = document.getElementById('btn-salvar-produto');
+    const btnCancelar = document.getElementById('btn-cancelar-edicao');
     
-    if (btnCadastrar) {
-        btnCadastrar.addEventListener('click', (e) => {
+    const formTitle = document.getElementById('form-title');
+    const formSubtitle = document.getElementById('form-subtitle');
+    
+    const nomeInput = document.getElementById('prod-nome-input');
+    const descInput = document.getElementById('prod-desc-input');
+    const precoInput = document.getElementById('prod-preco-input');
+    const pesoInput = document.getElementById('prod-peso-input');
+    const catSelect = document.getElementById('prod-cat-input');
+    const ativoCheck = document.getElementById('prod-ativo-input');
+
+    let linhaEmEdicao = null; // Armazena a linha que está a ser editada (se houver)
+
+    // Função para ligar o clique aos textos de "Editar" da tabela
+    function ativarBotoesEditar() {
+        document.querySelectorAll('.text-btn-editar').forEach(btn => {
+            btn.onclick = function() {
+                const tr = this.closest('tr');
+                linhaEmEdicao = tr;
+
+                // Extrair dados da linha
+                const nome = tr.querySelector('.prod-nome')?.textContent.trim() || '';
+                const desc = tr.querySelector('.prod-desc')?.textContent.trim() || '';
+                const cat = tr.querySelector('.prod-cat')?.textContent.trim() || 'Tradicional';
+                const peso = tr.querySelector('.prod-peso')?.textContent.trim() || '';
+                const preco = tr.querySelector('.prod-preco')?.textContent.trim().replace('R$ ', '') || '';
+                const statusText = tr.querySelector('.prod-status')?.textContent.trim() || 'Disponível';
+
+                // Preencher o formulário à direita
+                if (nomeInput) nomeInput.value = nome;
+                if (descInput) descInput.value = desc;
+                if (precoInput) precoInput.value = preco;
+                if (pesoInput) pesoInput.value = peso;
+                if (catSelect) catSelect.value = cat;
+                if (ativoCheck) ativoCheck.checked = (statusText === 'Disponível');
+
+                // Mudar o visual do painel para o modo de Edição
+                if (formTitle) formTitle.textContent = 'Editar produto';
+                if (formSubtitle) formSubtitle.textContent = 'Atualize os dados e salve as alterações.';
+                if (btnSalvar) btnSalvar.textContent = 'Salvar alterações';
+                if (btnCancelar) btnCancelar.style.display = 'block';
+
+                // Destacar visualmente a linha selecionada
+                document.querySelectorAll('tbody tr').forEach(row => row.style.background = 'transparent');
+                tr.style.background = '#fff8f5';
+            };
+        });
+    }
+
+    // Inicializar os botões existentes na tabela
+    ativarBotoesEditar();
+
+    // Ação do Botão Salvar / Cadastrar
+    if (btnSalvar) {
+        btnSalvar.addEventListener('click', (e) => {
             e.preventDefault();
 
-            // Capturar os valores pelos IDs corretos do formulário
-            const nomeInput = document.getElementById('prod-nome');
-            const descInput = document.getElementById('prod-desc');
-            const precoInput = document.getElementById('prod-preco');
-            const pesoInput = document.getElementById('prod-peso');
-            
             const nome = nomeInput ? nomeInput.value.trim() : '';
-            const desc = descInput ? descInput.value.trim() : 'Novo item';
+            const desc = descInput ? descInput.value.trim() : '';
             const preco = precoInput ? precoInput.value.trim() : '0,00';
-            const estoque = pesoInput ? pesoInput.value.trim() : '1';
+            const peso = pesoInput ? pesoInput.value.trim() : '1 kg';
+            const categoria = catSelect ? catSelect.value : 'Tradicional';
+            const disponivel = ativoCheck ? ativoCheck.checked : true;
 
             if (!nome) {
                 alert('Por favor, informe o nome do produto.');
@@ -23,39 +71,80 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Encontrar a tabela de produtos na tela
             const tabelaProdutos = document.querySelector('table tbody');
             if (!tabelaProdutos) return;
 
-            // Criar a nova linha (tr) com os botões empilhados (Editar em cima, Excluir em baixo)
-            const novaLinha = document.createElement('tr');
-            
-            novaLinha.innerHTML = `
-                <td>
-                    <strong>${nome}</strong><br>
-                    <small>${desc}</small>
-                </td>
-                <td>R$ ${preco}</td>
-                <td>${estoque} un.</td>
-                <td><span class="badge ready">Ativo</span></td>
-                <td>
-                    <div class="btn-group-column">
-                        <button class="btn-action">Editar</button>
-                        <button class="btn-action btn-danger" onclick="this.closest('tr').remove()">Excluir</button>
-                    </div>
-                </td>
-            `;
+            const badgeClass = disponivel ? 'ready' : 'pending';
+            const badgeText = disponivel ? 'Disponível' : 'Indisponível';
 
-            // Adicionar a nova linha no topo da tabela
-            tabelaProdutos.prepend(novaLinha);
+            if (linhaEmEdicao) {
+                // MODO EDIÇÃO: Atualizar a linha existente
+                linhaEmEdicao.querySelector('.prod-nome').textContent = nome;
+                linhaEmEdicao.querySelector('.prod-desc').textContent = desc;
+                linhaEmEdicao.querySelector('.prod-cat').textContent = categoria;
+                linhaEmEdicao.querySelector('.prod-peso').textContent = peso.includes('kg') ? peso : `${peso} kg`;
+                linhaEmEdicao.querySelector('.prod-preco').textContent = `R$ ${preco}`;
+                
+                const badge = linhaEmEdicao.querySelector('.prod-status');
+                if (badge) {
+                    badge.className = `badge ${badgeClass} prod-status`;
+                    badge.textContent = badgeText;
+                }
 
-            // Limpar os campos do formulário após o cadastro
-            if (nomeInput) nomeInput.value = '';
-            if (descInput) descInput.value = '';
-            if (precoInput) precoInput.value = '';
-            if (pesoInput) pesoInput.value = '';
+                linhaEmEdicao.style.background = 'transparent';
+                alert('Produto atualizado com sucesso!');
+            } else {
+                // MODO CADASTRO: Criar nova linha
+                const novaLinha = document.createElement('tr');
+                novaLinha.innerHTML = `
+                    <td>
+                        <strong class="prod-nome">${nome}</strong><br>
+                        <small class="prod-desc">${desc}</small>
+                    </td>
+                    <td class="prod-cat">${categoria}</td>
+                    <td class="prod-peso">${peso.includes('kg') ? peso : `${peso} kg`}</td>
+                    <td class="prod-preco">R$ ${preco}</td>
+                    <td><span class="badge ${badgeClass} prod-status">${badgeText}</span></td>
+                    <td>
+                        <div style="display: flex; flex-direction: column; gap: 4px;">
+                            <span class="text-btn-editar" style="cursor: pointer; font-size: 0.85rem; font-weight: 600; color: #ff5722;">Editar</span>
+                            <span class="text-btn-excluir" style="cursor: pointer; font-size: 0.85rem; font-weight: 600; color: #d32f2f;" onclick="this.closest('tr').remove()">Excluir</span>
+                        </div>
+                    </td>
+                `;
+                tabelaProdutos.prepend(novaLinha);
+                ativarBotoesEditar(); // Reativar o evento de edição para o novo item
+                alert('Produto cadastrado com sucesso!');
+            }
 
-            alert('Produto cadastrado com sucesso!');
+            // Resetar o formulário
+            resetarFormulario();
         });
+    }
+
+    // Ação do Botão Cancelar Edição
+    if (btnCancelar) {
+        btnCancelar.addEventListener('click', (e) => {
+            e.preventDefault();
+            resetarFormulario();
+        });
+    }
+
+    function resetarFormulario() {
+        if (linhaEmEdicao) {
+            linhaEmEdicao.style.background = 'transparent';
+            linhaEmEdicao = null;
+        }
+        if (formTitle) formTitle.textContent = 'Novo produto';
+        if (formSubtitle) formSubtitle.textContent = 'Cadastre um novo pacote no catálogo da loja.';
+        if (btnSalvar) btnSalvar.textContent = '+ Cadastrar produto';
+        if (btnCancelar) btnCancelar.style.display = 'none';
+
+        if (nomeInput) nomeInput.value = '';
+        if (descInput) descInput.value = '';
+        if (precoInput) precoInput.value = '';
+        if (pesoInput) pesoInput.value = '';
+        if (catSelect) catSelect.value = 'Tradicional';
+        if (ativoCheck) ativoCheck.checked = true;
     }
 });
