@@ -14,8 +14,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let linhaEmEdicao = null; // Armazena a linha que está a ser editada (se houver)
 
-    // Função para ligar o clique aos textos de "Editar" da tabela
-    function ativarBotoesEditar() {
+    // Elementos do Modal de Exclusão
+    const modalExcluir = document.getElementById('modal-excluir');
+    const btnFecharModal = document.getElementById('btn-fechar-modal');
+    const btnCancelarExclusao = document.getElementById('btn-cancelar-exclusao');
+    const btnConfirmarExclusao = document.getElementById('btn-confirmar-exclusao');
+    const modalProdNome = document.getElementById('modal-prod-nome');
+    const modalProdInfo = document.getElementById('modal-prod-info');
+
+    let linhaParaExcluir = null;
+
+    // Função para exibir o Popup Estilizado (Toast)
+    function mostrarToast(titulo, mensagem, tipo = 'sucesso') {
+        const toast = document.getElementById('toast-notification');
+        const toastTitle = document.getElementById('toast-title');
+        const toastMessage = document.getElementById('toast-message');
+        const toastIcon = document.getElementById('toast-icon');
+
+        if (!toast) return;
+
+        toastTitle.textContent = titulo;
+        toastMessage.textContent = mensagem;
+        
+        if (tipo === 'sucesso') {
+            toastIcon.textContent = '✅';
+            toast.style.borderLeft = '4px solid #4CAF50';
+        } else if (tipo === 'excluir') {
+            toastIcon.textContent = '🗑️';
+            toast.style.borderLeft = '4px solid #c62828';
+        }
+
+        toast.style.display = 'flex';
+
+        // Esconder automaticamente após 3 segundos
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 3000);
+    }
+
+    // 1. Função para ligar os eventos de clique em EDITAR e EXCLUIR na tabela
+    function ativarAcoesTabela() {
+        // Evento de Editar
         document.querySelectorAll('.text-btn-editar').forEach(btn => {
             btn.onclick = function() {
                 const tr = this.closest('tr');
@@ -48,12 +87,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 tr.style.background = '#fff8f5';
             };
         });
+
+        // Evento de Excluir (Abre o Modal)
+        document.querySelectorAll('.text-btn-excluir').forEach(btn => {
+            btn.onclick = function() {
+                const tr = this.closest('tr');
+                linhaParaExcluir = tr;
+
+                // Extrair dados para mostrar no modal
+                const nome = tr.querySelector('.prod-nome')?.textContent.trim() || 'Produto';
+                const cat = tr.querySelector('.prod-cat')?.textContent.trim() || 'Categoria';
+                const preco = tr.querySelector('.prod-preco')?.textContent.trim() || 'R$ 0,00';
+                const desc = tr.querySelector('.prod-desc')?.textContent.trim() || '';
+
+                if (modalProdNome) modalProdNome.textContent = `${nome} ${desc ? '· ' + desc : ''}`;
+                if (modalProdInfo) modalProdInfo.textContent = `${cat} · ${preco}`;
+
+                // Mostrar modal
+                if (modalExcluir) modalExcluir.style.display = 'flex';
+            };
+        });
     }
 
-    // Inicializar os botões existentes na tabela
-    ativarBotoesEditar();
+    // Inicializar ações nos itens já existentes na página
+    ativarAcoesTabela();
 
-    // Ação do Botão Salvar / Cadastrar
+    // 2. Controlar o Fechamento do Modal de Exclusão
+    function fecharModal() {
+        if (modalExcluir) modalExcluir.style.display = 'none';
+        linhaParaExcluir = null;
+    }
+
+    if (btnFecharModal) btnFecharModal.onclick = fecharModal;
+    if (btnCancelarExclusao) btnCancelarExclusao.onclick = fecharModal;
+
+    // Confirmar a exclusão efetiva da linha
+    if (btnConfirmarExclusao) {
+        btnConfirmarExclusao.onclick = function() {
+            if (linhaParaExcluir) {
+                linhaParaExcluir.remove();
+                mostrarToast('Atenção', 'Produto excluído!', 'excluir');
+                fecharModal();
+            }
+        };
+    }
+
+    // 3. Ação do Botão Salvar / Cadastrar
     if (btnSalvar) {
         btnSalvar.addEventListener('click', (e) => {
             e.preventDefault();
@@ -92,9 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 linhaEmEdicao.style.background = 'transparent';
-                alert('Produto atualizado com sucesso!');
+                mostrarToast('Sucesso', 'Produto atualizado!');
             } else {
-                // MODO CADASTRO: Criar nova linha
+                // MODO CADASTRO: Criar nova linha na tabela
                 const novaLinha = document.createElement('tr');
                 novaLinha.innerHTML = `
                     <td>
@@ -108,21 +187,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>
                         <div style="display: flex; flex-direction: column; gap: 4px;">
                             <span class="text-btn-editar" style="cursor: pointer; font-size: 0.85rem; font-weight: 600; color: #ff5722;">Editar</span>
-                            <span class="text-btn-excluir" style="cursor: pointer; font-size: 0.85rem; font-weight: 600; color: #d32f2f;" onclick="this.closest('tr').remove()">Excluir</span>
+                            <span class="text-btn-excluir" style="cursor: pointer; font-size: 0.85rem; font-weight: 600; color: #d32f2f;">Excluir</span>
                         </div>
                     </td>
                 `;
                 tabelaProdutos.prepend(novaLinha);
-                ativarBotoesEditar(); // Reativar o evento de edição para o novo item
-                alert('Produto cadastrado com sucesso!');
+                ativarAcoesTabela(); // Reativar os cliques para o novo item
+                mostrarToast('Sucesso', 'Produto cadastrado!');
             }
 
-            // Resetar o formulário
+            // Resetar o formulário de volta ao estado padrão
             resetarFormulario();
         });
     }
 
-    // Ação do Botão Cancelar Edição
+    // 4. Ação do Botão Cancelar Edição
     if (btnCancelar) {
         btnCancelar.addEventListener('click', (e) => {
             e.preventDefault();

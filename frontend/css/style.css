@@ -292,4 +292,16 @@ th {
     text-decoration: underline;
     color: #b71c1c !important;
 }
+
+/* Animação para o Popup de Notificação */
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
 /* FRONT COMERCIANTE FIM */
