@@ -290,4 +290,20 @@ th {
     flex: 1;
 }
 
+/* Organização dos Botões de Ação em Produtos */
+.btn-group-column {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: fit-content;
+}
+
+.btn-action.btn-danger {
+    color: #d32f2f;
+    border-color: #ffcdd2;
+}
+
+.btn-action.btn-danger:hover {
+    background-color: #ffebee;
+}
 /* FRONT COMERCIANTE FIM */

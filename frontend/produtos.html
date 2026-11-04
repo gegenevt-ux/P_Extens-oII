@@ -35,67 +35,111 @@
             <header class="top-header">
                 <div>
                     <h1>Produtos</h1>
-                    <p>Gerencie o catálogo de produtos da sua loja.</p>
-                </div>
-                <div class="header-actions">
-                    <button class="btn-primary" id="btn-novo-produto">+ Novo Produto</button>
+                    <p>Gerencie o catálogo, os preços e a disponibilidade para pedidos.</p>
                 </div>
             </header>
 
-            <!-- Tabela de Produtos -->
-            <section class="recent-orders">
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Produto</th>
-                                <th>Preço</th>
-                                <th>Estoque</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <strong>Carvão Vegetal 3kg</strong><br>
-                                    <small>Ideal para churrasco rápido</small>
-                                </td>
-                                <td>R$ 18,00</td>
-                                <td>25 un.</td>
-                                <td><span class="badge ready">Ativo</span></td>
-                                <td>
-                                    <button class="btn-action">Editar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>Acendedor em Gel 500ml</strong><br>
-                                    <small>Acendimento rápido e sem fumaça</small>
-                                </td>
-                                <td>R$ 10,00</td>
-                                <td>12 un.</td>
-                                <td><span class="badge ready">Ativo</span></td>
-                                <td>
-                                    <button class="btn-action">Editar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>Saco de Carvão Premium 5kg</strong><br>
-                                    <small>Especial para parrilha</small>
-                                </td>
-                                <td>R$ 28,00</td>
-                                <td>0 un.</td>
-                                <td><span class="badge pending">Indisponível</span></td>
-                                <td>
-                                    <button class="btn-action">Editar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+            <!-- Layout em Grid: Tabela à Esquerda + Formulário à Direita -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start;">
+                
+                <!-- Tabela de Produtos -->
+                <section class="recent-orders">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Preço</th>
+                                    <th>Estoque</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong>Carvão Vegetal 3kg</strong><br>
+                                        <small>Ideal para churrasco rápido</small>
+                                    </td>
+                                    <td>R$ 18,00</td>
+                                    <td>25 un.</td>
+                                    <td><span class="badge ready">Ativo</span></td>
+                                    <td>
+                                        <div class="btn-group-column">
+                                            <button class="btn-action">Editar</button>
+                                            <button class="btn-action btn-danger" onclick="this.closest('tr').remove()">Excluir</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Acendedor em Gel 500ml</strong><br>
+                                        <small>Acendimento rápido e sem fumaça</small>
+                                    </td>
+                                    <td>R$ 10,00</td>
+                                    <td>12 un.</td>
+                                    <td><span class="badge ready">Ativo</span></td>
+                                    <td>
+                                        <div class="btn-group-column">
+                                            <button class="btn-action">Editar</button>
+                                            <button class="btn-action btn-danger" onclick="this.closest('tr').remove()">Excluir</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Saco de Carvão Premium 5kg</strong><br>
+                                        <small>Especial para parrilha</small>
+                                    </td>
+                                    <td>R$ 28,00</td>
+                                    <td>0 un.</td>
+                                    <td><span class="badge pending">Indisponível</span></td>
+                                    <td>
+                                        <div class="btn-group-column">
+                                            <button class="btn-action">Editar</button>
+                                            <button class="btn-action btn-danger" onclick="this.closest('tr').remove()">Excluir</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Formulário de Novo Produto (Lado Direito) -->
+                <section class="recent-orders" style="padding: 20px;">
+                    <h3 style="margin-bottom: 8px; font-size: 1.2rem;">Novo produto</h3>
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 16px;">Cadastre um novo pacote no catálogo.</p>
+                    
+                    <form class="form-config" id="form-produto">
+                        <div class="form-group">
+                            <label for="prod-nome">Nome</label>
+                            <input type="text" id="prod-nome" placeholder="Ex.: Carvão vegetal" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="prod-desc">Descrição</label>
+                            <textarea id="prod-desc" placeholder="Conte um pouco sobre o produto" class="form-control" style="resize: vertical; min-height: 70px;"></textarea>
+                        </div>
+
+                        <div style="display: flex; gap: 10px;">
+                            <div class="form-group" style="flex: 1;">
+                                <label for="prod-preco">Preço (R$)</label>
+                                <input type="text" id="prod-preco" placeholder="0,00" class="form-control">
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label for="prod-peso">Estoque</label>
+                                <input type="text" id="prod-peso" placeholder="Ex.: 10" class="form-control">
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 16px;">
+                            <button type="button" id="btn-cadastrar-produto" class="btn-primary" style="width: 100%;">+ Cadastrar produto</button>
+                        </div>
+                    </form>
+                </section>
+
+            </div>
         </main>
     </div>
 
