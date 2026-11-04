@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const catSelect = document.getElementById('prod-cat-input');
     const ativoCheck = document.getElementById('prod-ativo-input');
 
+    // Elementos da Foto
+    const fotoInput = document.getElementById('prod-foto-input');
+    const fotoPreviewContainer = document.getElementById('foto-preview-container');
+    let imagemBase64Atual = '';
+
     let linhaEmEdicao = null; // Armazena a linha que está a ser editada (se houver)
 
     // Elementos do Modal de Exclusão
@@ -50,6 +55,33 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             toast.style.display = 'none';
         }, 3000);
+    }
+
+    // Gestão de Upload / Preview da Foto no Frontend
+    if (fotoInput) {
+        fotoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) {
+                    mostrarToast('Atenção', 'A imagem deve ter no máximo 5 MB.', 'excluir');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    imagemBase64Atual = event.target.result;
+                    if (fotoPreviewContainer) {
+                        fotoPreviewContainer.innerHTML = `
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                                <img src="${imagemBase64Atual}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;">
+                                <span style="font-size: 0.85rem; color: #333; font-weight: 600;">${file.name}</span>
+                            </div>
+                        `;
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
     }
 
     // 1. Função para ligar os eventos de clique em EDITAR e EXCLUIR na tabela
@@ -139,14 +171,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const nome = nomeInput ? nomeInput.value.trim() : '';
             const desc = descInput ? descInput.value.trim() : '';
-            const preco = precoInput ? precoInput.value.trim() : '0,00';
+            const preco = precoInput ? precoInput.value.trim() : '';
             const peso = pesoInput ? pesoInput.value.trim() : '1 kg';
             const categoria = catSelect ? catSelect.value : 'Tradicional';
             const disponivel = ativoCheck ? ativoCheck.checked : true;
 
-            if (!nome) {
-                alert('Por favor, informe o nome do produto.');
-                if (nomeInput) nomeInput.focus();
+            // Validação de campos obrigatórios
+            if (!nome || !preco) {
+                mostrarToast('Atenção', 'Por favor, insira as informações necessárias.', 'excluir');
+                if (nomeInput && !nome) nomeInput.focus();
                 return;
             }
 
@@ -225,5 +258,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pesoInput) pesoInput.value = '';
         if (catSelect) catSelect.value = 'Tradicional';
         if (ativoCheck) ativoCheck.checked = true;
+
+        imagemBase64Atual = '';
+        if (fotoInput) fotoInput.value = '';
+        if (fotoPreviewContainer) {
+            fotoPreviewContainer.innerHTML = `
+                <span style="font-size: 0.85rem; color: #666;">🖼️ Clique para enviar uma foto<br><small>JPG ou PNG - até 5 MB</small></span>
+            `;
+        }
     }
 });

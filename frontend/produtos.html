@@ -147,8 +147,12 @@
 
                         <div class="form-group">
                             <label>Foto</label>
-                            <div style="border: 2px dashed #ddd; border-radius: 6px; padding: 12px; text-align: center; background: #fafafa; cursor: pointer;">
-                                <span style="font-size: 0.85rem; color: #666;">🖼️ Clique para enviar uma foto<br><small>JPG ou PNG - até 5 MB</small></span>
+                            <!-- Caixa clicável que aciona o input file -->
+                            <div id="drop-zone-foto" style="border: 2px dashed #ddd; border-radius: 6px; padding: 12px; text-align: center; background: #fafafa; cursor: pointer; position: relative; overflow: hidden;">
+                                <input type="file" id="prod-foto-input" accept="image/png, image/jpeg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;">
+                                <div id="foto-preview-container">
+                                    <span style="font-size: 0.85rem; color: #666;" id="foto-texto-padrao">🖼️ Clique para enviar uma foto<br><small>JPG ou PNG - até 5 MB</small></span>
+                                </div>
                             </div>
                         </div>
 
