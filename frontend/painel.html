@@ -10,23 +10,41 @@
 <body>
 
     <div class="dashboard-container">
-        <!-- Menu Lateral (Sidebar) -->
         <aside class="sidebar">
+            <!-- Topo: Logo -->
             <div class="logo-area">
-                <h2>CARVÃO DO PEDRO</h2>
-                <span>Área do Comerciante</span>
+                <div class="logo-text">
+                    <h2>CARVÃO DO PEDRO</h2>
+                </div>
             </div>
             
+            <span class="sidebar-section-title">ÁREA DO PEDRO</span>
+
+            <!-- Meio: Menu de Navegação -->
             <nav class="nav-menu">
-                <a href="painel.html" class="nav-item">📊 Painel</a>
+                <a href="painel.html" class="nav-item">🎛️ Painel</a>
                 <a href="produtos.html" class="nav-item">📦 Produtos</a>
-                <a href="pedidos.html" class="nav-item active">🛒 Pedidos</a>
-                <a href="comercio.html" class="nav-item">⚙️ Meu Comércio</a>
+                <a href="pedidos.html" class="nav-item">📋 Pedidos</a>
+                <a href="comercio.html" class="nav-item">🏪 Meu comércio</a>
             </nav>
 
+            <!-- Meio / Abaixo do menu: O Card "Sua loja, no seu ritmo" -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-icon">🔥</div>
+                <h4>Sua loja, no seu ritmo.</h4>
+                <p>Produtos e pedidos organizados em um só lugar.</p>
+            </div>
+
+            <!-- Fim / Rodapé absoluto: Conta do Usuário -->
             <div class="sidebar-footer">
-                <p>Pedro</p>
-                <small>Administrador</small>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 36px; height: 36px; background: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; font-size: 0.9rem;">P</div>
+                    <div style="flex-grow: 1;">
+                        <p style="color: #fff; font-size: 0.9rem; font-weight: 600; margin: 0;">Pedro</p>
+                        <small style="color: #888; font-size: 0.75rem;">Administrador</small>
+                    </div>
+                    <span style="color: #888; font-size: 1.1rem; cursor: pointer;" title="Sair">🚪</span>
+                </div>
             </div>
         </aside>
 
