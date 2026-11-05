@@ -304,4 +304,90 @@ th {
         opacity: 1;
     }
 }
+
+/* Estilos para a Tela de Pedidos */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+.filter-tab {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.filter-tab.active {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+.order-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+}
+.order-body {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 1fr;
+    gap: 16px;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 14px;
+}
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #666;
+}
+.order-label {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+}
+.badge-status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.badge-pendente { background: #fef3c7; color: #b45309; }
+.badge-preparando { background: #ffedd5; color: #c2410c; }
+.badge-pronto { background: #e0f2fe; color: #0369a1; }
+.badge-concluido { background: #dcfce7; color: #15803d; }
+.badge-cancelado { background: #fee2e2; color: #b91c1c; }
+
+@media (max-width: 768px) {
+    .order-body {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
 /* FRONT COMERCIANTE FIM */

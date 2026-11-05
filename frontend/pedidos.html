@@ -13,7 +13,7 @@
         <!-- Menu Lateral (Sidebar) -->
         <aside class="sidebar">
             <div class="logo-area">
-                <h2>CARVÃO DO BRASA</h2>
+                <h2>CARVÃO DO PEDRO</h2>
                 <span>Área do Comerciante</span>
             </div>
             
@@ -32,58 +32,239 @@
 
         <!-- Conteúdo Principal -->
         <main class="main-content">
-            <header class="top-header">
+            <header class="top-header" style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
-                    <h1>Gerenciamento de Pedidos</h1>
-                    <p>Acompanhe e atualize o status dos pedidos em tempo real.</p>
+                    <h1>Pedidos</h1>
+                    <p>Do pedido enviado à brasa pronta. Acompanhe cada etapa por aqui.</p>
+                </div>
+                <div style="background: #fff; border: 1px solid #e0e0e0; padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <span>📅 Todos os períodos</span> ▾
                 </div>
             </header>
 
-            <!-- Tabela Completa de Pedidos -->
-            <section class="recent-orders">
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Pedido</th>
-                                <th>Cliente / Data</th>
-                                <th>Itens</th>
-                                <th>Modalidade</th>
-                                <th>Status</th>
-                                <th>Total</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>#1048</strong></td>
-                                <td>João da Silva<br><small>03/11/2026 - 10:42</small></td>
-                                <td>1x Carvão 3kg<br><small>1x Acendedor</small></td>
-                                <td>Entrega</td>
-                                <td><span class="badge pending">Pendente</span></td>
-                                <td>R$ 28,00</td>
-                                <td>
-                                    <button class="btn-primary" style="padding: 4px 10px; font-size: 0.8rem;">Avançar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>#1047</strong></td>
-                                <td>Maria Oliveira<br><small>03/11/2026 - 09:20</small></td>
-                                <td>2x Carvão Premium 5kg</td>
-                                <td>Retirada</td>
-                                <td><span class="badge ready">Pronto</span></td>
-                                <td>R$ 56,00</td>
-                                <td>
-                                    <button class="btn-action">Detalhes</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <!-- Abas de Filtro -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filtrarPedidos('todos', this)">Todos</button>
+                <button class="filter-tab" onclick="filtrarPedidos('pendente', this)">Pendente</button>
+                <button class="filter-tab" onclick="filtrarPedidos('preparando', this)">Preparando</button>
+                <button class="filter-tab" onclick="filtrarPedidos('pronto', this)">Pronto</button>
+                <button class="filter-tab" onclick="filtrarPedidos('concluido', this)">Concluído</button>
+                <button class="filter-tab" onclick="filtrarPedidos('cancelado', this)">Cancelado</button>
+            </div>
+
+            <div style="text-align: right; font-size: 0.85rem; color: #666; margin-bottom: 12px;">5 pedidos</div>
+
+            <!-- LISTA DE PEDIDOS EM CARDS -->
+            <div id="lista-pedidos">
+
+                <!-- Pedido #1048 (Pendente) -->
+                <div class="order-card" data-status="pendente">
+                    <div class="order-header">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <strong style="font-size: 1.1rem; color: #111;">Pedido #1048</strong>
+                            <span class="badge-status badge-pendente">● Pendente</span>
+                        </div>
+                        <span style="font-size: 0.85rem; color: #888;">03/11/2026 · 10:42</span>
+                    </div>
+                    <div class="order-body">
+                        <div>
+                            <span class="order-label">Cliente</span>
+                            <strong style="font-size: 0.95rem; color: #111; display: block;">João da Silva</strong>
+                            <span style="font-size: 0.8rem; color: #666;">📞 (69) 99999-1234</span>
+                        </div>
+                        <div>
+                            <span class="order-label">Itens do Pedido</span>
+                            <span style="font-size: 0.9rem; color: #333; display: block;">2 × Carvão vegetal 5 kg · 1 × Carvão vegetal 3 kg</span>
+                            <span style="font-size: 0.8rem; color: #666;">Subtotal R$ 74,00</span>
+                        </div>
+                        <div>
+                            <span class="order-label">Entrega</span>
+                            <span style="font-size: 0.85rem; color: #333; display: block;">Rua dos Ipês, 245 · Aponiã · Porto Velho/RO</span>
+                            <span style="font-size: 0.8rem; color: #666;">Taxa R$ 8,00</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <span class="order-label">Total</span>
+                            <strong style="font-size: 1.3rem; color: #111;">R$ 82,00</strong>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <span style="color: #555;">ℹ️ Aguardando confirmação</span>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Cancelar</button>
+                            <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Aceitar e preparar</button>
+                        </div>
+                    </div>
                 </div>
-            </section>
+
+                <!-- Pedido #1047 (Pronto) -->
+                <div class="order-card" data-status="pronto">
+                    <div class="order-header">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <strong style="font-size: 1.1rem; color: #111;">Pedido #1047</strong>
+                            <span class="badge-status badge-pronto">● Pronto</span>
+                        </div>
+                        <span style="font-size: 0.85rem; color: #888;">03/11/2026 · 09:20</span>
+                    </div>
+                    <div class="order-body">
+                        <div>
+                            <span class="order-label">Cliente</span>
+                            <strong style="font-size: 0.95rem; color: #111; display: block;">João da Silva</strong>
+                            <span style="font-size: 0.8rem; color: #666;">📞 (69) 99999-1234</span>
+                        </div>
+                        <div>
+                            <span class="order-label">Itens do Pedido</span>
+                            <span style="font-size: 0.9rem; color: #333; display: block;">2 × Carvão vegetal 5 kg · 1 × Carvão vegetal 3 kg</span>
+                            <span style="font-size: 0.8rem; color: #666;">Subtotal R$ 74,00</span>
+                        </div>
+                        <div>
+                            <span class="order-label">Retirada na Loja</span>
+                            <span style="font-size: 0.85rem; color: #333; display: block;">Rua das Castanheiras, 120 · Centro · Porto Velho/RO</span>
+                            <span style="font-size: 0.8rem; color: #666;">Taxa R$ 0,00 · endereço de exemplo</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <span class="order-label">Total</span>
+                            <strong style="font-size: 1.3rem; color: #111;">R$ 74,00</strong>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <span style="color: #555;">ℹ️ Pronto para retirada na loja</span>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Cancelar</button>
+                            <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Concluir pedido</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pedido #1046 (Preparando) -->
+                <div class="order-card" data-status="preparando">
+                    <div class="order-header">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <strong style="font-size: 1.1rem; color: #111;">Pedido #1046</strong>
+                            <span class="badge-status badge-preparando">● Preparando</span>
+                        </div>
+                        <span style="font-size: 0.85rem; color: #888;">03/11/2026 · 08:55</span>
+                    </div>
+                    <div class="order-body">
+                        <div>
+                            <span class="order-label">Cliente</span>
+                            <strong style="font-size: 0.95rem; color: #111; display: block;">João da Silva</strong>
+                            <span style="font-size: 0.8rem; color: #666;">📞 (69) 99999-1234</span>
+                        </div>
+                        <div>
+                            <span class="order-label">Itens do Pedido</span>
+                            <span style="font-size: 0.9rem; color: #333; display: block;">2 × Carvão vegetal 3 kg</span>
+                            <span style="font-size: 0.8rem; color: #666;">Subtotal R$ 36,00</span>
+                        </div>
+                        <div>
+                            <span class="order-label">Entrega</span>
+                            <span style="font-size: 0.85rem; color: #333; display: block;">Rua dos Ipês, 245 · Aponiã · Porto Velho/RO</span>
+                            <span style="font-size: 0.8rem; color: #666;">Taxa R$ 8,00</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <span class="order-label">Total</span>
+                            <strong style="font-size: 1.3rem; color: #111;">R$ 44,00</strong>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <span style="color: #555;">ℹ️ Separe os itens e confira as quantidades</span>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Cancelar</button>
+                            <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Marcar como pronto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pedido #1045 (Concluído) -->
+                <div class="order-card" data-status="concluido">
+                    <div class="order-header">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <strong style="font-size: 1.1rem; color: #111;">Pedido #1045</strong>
+                            <span class="badge-status badge-concluido">● Concluído</span>
+                        </div>
+                        <span style="font-size: 0.85rem; color: #888;">02/11/2026 · 14:30</span>
+                    </div>
+                    <div class="order-body">
+                        <div>
+                            <span class="order-label">Cliente</span>
+                            <strong style="font-size: 0.95rem; color: #111; display: block;">João da Silva</strong>
+                            <span style="font-size: 0.8rem; color: #666;">📞 (69) 99999-1234</span>
+                        </div>
+                        <div>
+                            <span class="order-label">Itens do Pedido</span>
+                            <span style="font-size: 0.9rem; color: #333; display: block;">1 × Carvão vegetal 5 kg</span>
+                            <span style="font-size: 0.8rem; color: #666;">Subtotal R$ 28,00</span>
+                        </div>
+                        <div>
+                            <span class="order-label">Entrega</span>
+                            <span style="font-size: 0.85rem; color: #333; display: block;">Rua dos Ipês, 245 · Aponiã · Porto Velho/RO</span>
+                            <span style="font-size: 0.8rem; color: #666;">Taxa R$ 8,00</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <span class="order-label">Total</span>
+                            <strong style="font-size: 1.3rem; color: #111;">R$ 36,00</strong>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <span style="color: #555;">✓ Pedido concluído · sem ações pendentes</span>
+                        <div></div>
+                    </div>
+                </div>
+
+                <!-- Pedido #1044 (Cancelado) -->
+                <div class="order-card" data-status="cancelado">
+                    <div class="order-header">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <strong style="font-size: 1.1rem; color: #111;">Pedido #1044</strong>
+                            <span class="badge-status badge-cancelado">● Cancelado</span>
+                        </div>
+                        <span style="font-size: 0.85rem; color: #888;">30/10/2026 · 11:10</span>
+                    </div>
+                    <div class="order-body">
+                        <div>
+                            <span class="order-label">Cliente</span>
+                            <strong style="font-size: 0.95rem; color: #111; display: block;">João da Silva</strong>
+                            <span style="font-size: 0.8rem; color: #666;">📞 (69) 99999-1234</span>
+                        </div>
+                        <div>
+                            <span class="order-label">Itens do Pedido</span>
+                            <span style="font-size: 0.9rem; color: #333; display: block;">1 × Carvão vegetal 3 kg</span>
+                            <span style="font-size: 0.8rem; color: #666;">Subtotal R$ 18,00</span>
+                        </div>
+                        <div>
+                            <span class="order-label">Entrega</span>
+                            <span style="font-size: 0.85rem; color: #333; display: block;">Rua dos Ipês, 245 · Aponiã · Porto Velho/RO</span>
+                            <span style="font-size: 0.8rem; color: #666;">Taxa R$ 8,00</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <span class="order-label">Total</span>
+                            <strong style="font-size: 1.3rem; color: #111;">R$ 26,00</strong>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <span style="color: #b91c1c;">✕ Pedido cancelado · sem ações disponíveis</span>
+                        <div></div>
+                    </div>
+                </div>
+
+            </div>
         </main>
     </div>
 
-    <script src="js/main.js"></script>
+    <!-- Script de Filtro -->
+    <script>
+        function filtrarPedidos(status, elementoBtn) {
+            document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
+            elementoBtn.classList.add('active');
+
+            const cards = document.querySelectorAll('.order-card');
+            cards.forEach(card => {
+                if (status === 'todos' || card.getAttribute('data-status') === status) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
