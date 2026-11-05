@@ -268,3 +268,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// --- FUNÇÕES DA TELA DE PEDIDOS (Filtros e Dropdown de Período) ---
+
+// Filtrar pedidos pelas abas de status
+function filtrarPedidos(status, elementoBtn) {
+    document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
+    elementoBtn.classList.add('active');
+
+    const cards = document.querySelectorAll('.order-card');
+    cards.forEach(card => {
+        if (status === 'todos' || card.getAttribute('data-status') === status) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+// Abrir/fechar o menu dropdown de períodos
+function toggleMenuPeriodo(event) {
+    event.stopPropagation();
+    const menu = document.getElementById('menu-periodo-opcoes');
+    if (menu) {
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+}
+
+// Selecionar um período no menu
+function selecionarPeriodo(periodo) {
+    const textoSpan = document.getElementById('texto-periodo-selecionado');
+    if (textoSpan) {
+        textoSpan.textContent = `📅 ${periodo}`;
+    }
+    const menu = document.getElementById('menu-periodo-opcoes');
+    if (menu) {
+        menu.style.display = 'none';
+    }
+}
+
+// Fechar o menu de períodos ao clicar fora dele
+window.addEventListener('click', () => {
+    const menu = document.getElementById('menu-periodo-opcoes');
+    if (menu) {
+        menu.style.display = 'none';
+    }
+});

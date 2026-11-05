@@ -37,28 +37,40 @@
                     <h1>Pedidos</h1>
                     <p>Do pedido enviado à brasa pronta. Acompanhe cada etapa por aqui.</p>
                 </div>
-                <div style="background: #fff; border: 1px solid #e0e0e0; padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                    <span>📅 Todos os períodos</span> ▾
+                
+                <!-- Botão e Menu Dropdown de Períodos -->
+                <div style="position: relative;">
+                    <div id="btn-periodo-dropdown" onclick="toggleMenuPeriodo(event)" style="background: #fff; border: 1px solid #e0e0e0; padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none;">
+                        <span id="texto-periodo-selecionado">📅 Todos os períodos</span> ▾
+                    </div>
+                    
+                    <!-- Menu Dropdown -->
+                    <div id="menu-periodo-opcoes" style="display: none; position: absolute; right: 0; top: 42px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 180px; z-index: 100;">
+                        <div onclick="selecionarPeriodo('hoje', 'Hoje')" style="padding: 10px 14px; font-size: 0.85rem; cursor: pointer; border-bottom: 1px solid #f0f0f0;" onmouseover="this.style.background='#f9f9f9'" onmouseout="this.style.background='#fff'">Hoje</div>
+                        <div onclick="selecionarPeriodo('7dias', 'Últimos 7 dias')" style="padding: 10px 14px; font-size: 0.85rem; cursor: pointer; border-bottom: 1px solid #f0f0f0;" onmouseover="this.style.background='#f9f9f9'" onmouseout="this.style.background='#fff'">Últimos 7 dias</div>
+                        <div onclick="selecionarPeriodo('mes', 'Este mês')" style="padding: 10px 14px; font-size: 0.85rem; cursor: pointer; border-bottom: 1px solid #f0f0f0;" onmouseover="this.style.background='#f9f9f9'" onmouseout="this.style.background='#fff'">Este mês</div>
+                        <div onclick="selecionarPeriodo('todos', 'Todos os períodos')" style="padding: 10px 14px; font-size: 0.85rem; cursor: pointer; font-weight: 600;" onmouseover="this.style.background='#f9f9f9'" onmouseout="this.style.background='#fff'">Todos os períodos</div>
+                    </div>
                 </div>
             </header>
 
             <!-- Abas de Filtro -->
             <div class="filter-tabs">
-                <button class="filter-tab active" onclick="filtrarPedidos('todos', this)">Todos</button>
-                <button class="filter-tab" onclick="filtrarPedidos('pendente', this)">Pendente</button>
-                <button class="filter-tab" onclick="filtrarPedidos('preparando', this)">Preparando</button>
-                <button class="filter-tab" onclick="filtrarPedidos('pronto', this)">Pronto</button>
-                <button class="filter-tab" onclick="filtrarPedidos('concluido', this)">Concluído</button>
-                <button class="filter-tab" onclick="filtrarPedidos('cancelado', this)">Cancelado</button>
+                <button class="filter-tab active" onclick="filtrarStatus('todos', this)">Todos</button>
+                <button class="filter-tab" onclick="filtrarStatus('pendente', this)">Pendente</button>
+                <button class="filter-tab" onclick="filtrarStatus('preparando', this)">Preparando</button>
+                <button class="filter-tab" onclick="filtrarStatus('pronto', this)">Pronto</button>
+                <button class="filter-tab" onclick="filtrarStatus('concluido', this)">Concluído</button>
+                <button class="filter-tab" onclick="filtrarStatus('cancelado', this)">Cancelado</button>
             </div>
 
-            <div style="text-align: right; font-size: 0.85rem; color: #666; margin-bottom: 12px;">5 pedidos</div>
+            <div style="text-align: right; font-size: 0.85rem; color: #666; margin-bottom: 12px;" id="contador-pedidos">5 pedidos</div>
 
-            <!-- LISTA DE PEDIDOS EM CARDS -->
+            <!-- LISTA DE PEDIDOS EM CARDS (Adicionado o atributo data-data YYYY-MM-DD) -->
             <div id="lista-pedidos">
 
-                <!-- Pedido #1048 (Pendente) -->
-                <div class="order-card" data-status="pendente">
+                <!-- Pedido #1048 (Data: 2026-11-03 - Exemplo de Hoje) -->
+                <div class="order-card" data-status="pendente" data-data="2026-11-03">
                     <div class="order-header">
                         <div style="display: flex; align-items: center; gap: 12px;">
                             <strong style="font-size: 1.1rem; color: #111;">Pedido #1048</strong>
@@ -96,8 +108,8 @@
                     </div>
                 </div>
 
-                <!-- Pedido #1047 (Pronto) -->
-                <div class="order-card" data-status="pronto">
+                <!-- Pedido #1047 (Data: 2026-11-03) -->
+                <div class="order-card" data-status="pronto" data-data="2026-11-03">
                     <div class="order-header">
                         <div style="display: flex; align-items: center; gap: 12px;">
                             <strong style="font-size: 1.1rem; color: #111;">Pedido #1047</strong>
@@ -135,8 +147,8 @@
                     </div>
                 </div>
 
-                <!-- Pedido #1046 (Preparando) -->
-                <div class="order-card" data-status="preparando">
+                <!-- Pedido #1046 (Data: 2026-11-03) -->
+                <div class="order-card" data-status="preparando" data-data="2026-11-03">
                     <div class="order-header">
                         <div style="display: flex; align-items: center; gap: 12px;">
                             <strong style="font-size: 1.1rem; color: #111;">Pedido #1046</strong>
@@ -174,8 +186,8 @@
                     </div>
                 </div>
 
-                <!-- Pedido #1045 (Concluído) -->
-                <div class="order-card" data-status="concluido">
+                <!-- Pedido #1045 (Data: 2026-11-02 - Ontem / Últimos 7 dias / Mês atual) -->
+                <div class="order-card" data-status="concluido" data-data="2026-11-02">
                     <div class="order-header">
                         <div style="display: flex; align-items: center; gap: 12px;">
                             <strong style="font-size: 1.1rem; color: #111;">Pedido #1045</strong>
@@ -210,8 +222,8 @@
                     </div>
                 </div>
 
-                <!-- Pedido #1044 (Cancelado) -->
-                <div class="order-card" data-status="cancelado">
+                <!-- Pedido #1044 (Data: 2026-10-30 - Mês anterior ou fora dos 7 dias) -->
+                <div class="order-card" data-status="cancelado" data-data="2026-10-30">
                     <div class="order-header">
                         <div style="display: flex; align-items: center; gap: 12px;">
                             <strong style="font-size: 1.1rem; color: #111;">Pedido #1044</strong>
@@ -250,21 +262,94 @@
         </main>
     </div>
 
-    <!-- Script de Filtro -->
+    <!-- Script de Filtros Integrados (Status + Período) -->
     <script>
-        function filtrarPedidos(status, elementoBtn) {
+        let periodoAtual = 'todos';
+        let statusAtual = 'todos';
+
+        // Filtrar por Status (Abas)
+        function filtrarStatus(status, elementoBtn) {
             document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
             elementoBtn.classList.add('active');
+            statusAtual = status;
+            aplicarFiltrosCombinados();
+        }
 
+        // Selecionar Período no Dropdown
+        function selecionarPeriodo(filtroPeriodo, nomeTexto) {
+            const textoSpan = document.getElementById('texto-periodo-selecionado');
+            if (textoSpan) {
+                textoSpan.textContent = `📅 ${nomeTexto}`;
+            }
+            const menu = document.getElementById('menu-periodo-opcoes');
+            if (menu) {
+                menu.style.display = 'none';
+            }
+            periodoAtual = filtroPeriodo;
+            aplicarFiltrosCombinados();
+        }
+
+        // Aplicar ambos os filtros simultaneamente (Status + Período)
+        function aplicarFiltrosCombinados() {
             const cards = document.querySelectorAll('.order-card');
+            let visiveis = 0;
+
+            // Simulando a data "Hoje" com base na sua imagem (ex: 2026-11-03)
+            // Você pode alterar esta string se quiser testar outro dia como "Hoje"
+            const dataHojeStr = "2026-11-03"; 
+            const hoje = new Date(dataHojeStr + "T00:00:00");
+
             cards.forEach(card => {
-                if (status === 'todos' || card.getAttribute('data-status') === status) {
+                const cardStatus = card.getAttribute('data-status');
+                const cardDataStr = card.getAttribute('data-data'); // YYYY-MM-DD
+                const cardData = new Date(cardDataStr + "T00:00:00");
+
+                // 1. Validar Filtro de Status
+                let passaStatus = (statusAtual === 'todos' || cardStatus === statusAtual);
+
+                // 2. Validar Filtro de Período
+                let passaPeriodo = true;
+                if (periodoAtual === 'hoje') {
+                    passaPeriodo = (cardDataStr === dataHojeStr);
+                } else if (periodoAtual === '7dias') {
+                    const diffTime = hoje - cardData;
+                    const diffDays = diffTime / (1000 * 60 * 60 * 24);
+                    passaPeriodo = (diffDays >= 0 && diffDays <= 7);
+                } else if (periodoAtual === 'mes') {
+                    passaPeriodo = (cardData.getMonth() === hoje.getMonth() && cardData.getFullYear() === hoje.getFullYear());
+                }
+
+                // Mostrar ou esconder o card
+                if (passaStatus && passaPeriodo) {
                     card.style.display = 'block';
+                    visiveis++;
                 } else {
                     card.style.display = 'none';
                 }
             });
+
+            // Atualizar contador de pedidos visíveis
+            const contador = document.getElementById('contador-pedidos');
+            if (contador) {
+                contador.textContent = `${visiveis} pedido${visiveis === 1 ? '' : 's'}`;
+            }
         }
+
+        // Funções do Dropdown
+        function toggleMenuPeriodo(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('menu-periodo-opcoes');
+            if (menu) {
+                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+
+        window.addEventListener('click', () => {
+            const menu = document.getElementById('menu-periodo-opcoes');
+            if (menu) {
+                menu.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
