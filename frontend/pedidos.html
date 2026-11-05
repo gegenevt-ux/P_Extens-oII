@@ -66,22 +66,22 @@
 
             <div style="text-align: right; font-size: 0.85rem; color: #666; margin-bottom: 12px;" id="contador-pedidos">5 pedidos</div>
 
-            <!-- LISTA DE PEDIDOS EM CARDS (Adicionado o atributo data-data YYYY-MM-DD) -->
+            <!-- LISTA DE PEDIDOS EM CARDS -->
             <div id="lista-pedidos">
 
-                <!-- Pedido #1048 (Data: 2026-11-03 - Exemplo de Hoje) -->
+                <!-- Pedido #1048 (Pendente) -->
                 <div class="order-card" data-status="pendente" data-data="2026-11-03">
                     <div class="order-header">
                         <div style="display: flex; align-items: center; gap: 12px;">
-                            <strong style="font-size: 1.1rem; color: #111;">Pedido #1048</strong>
-                            <span class="badge-status badge-pendente">● Pendente</span>
+                            <strong style="font-size: 1.1rem; color: #111;" class="ped-num">Pedido #1048</strong>
+                            <span class="badge-status badge-pendente ped-badge">● Pendente</span>
                         </div>
                         <span style="font-size: 0.85rem; color: #888;">03/11/2026 · 10:42</span>
                     </div>
                     <div class="order-body">
                         <div>
                             <span class="order-label">Cliente</span>
-                            <strong style="font-size: 0.95rem; color: #111; display: block;">João da Silva</strong>
+                            <strong style="font-size: 0.95rem; color: #111; display: block;" class="ped-cliente">João da Silva</strong>
                             <span style="font-size: 0.8rem; color: #666;">📞 (69) 99999-1234</span>
                         </div>
                         <div>
@@ -96,31 +96,31 @@
                         </div>
                         <div style="text-align: right;">
                             <span class="order-label">Total</span>
-                            <strong style="font-size: 1.3rem; color: #111;">R$ 82,00</strong>
+                            <strong style="font-size: 1.3rem; color: #111;" class="ped-total">R$ 82,00</strong>
                         </div>
                     </div>
                     <div class="order-footer">
-                        <span style="color: #555;">ℹ️ Aguardando confirmação</span>
-                        <div style="display: flex; gap: 8px;">
-                            <button class="btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Cancelar</button>
+                        <span style="color: #555;" class="ped-footer-text">ℹ️ Aguardando confirmação</span>
+                        <div style="display: flex; gap: 8px;" class="ped-actions">
+                            <button class="btn-secondary btn-cancelar-pedido" style="padding: 8px 16px; font-size: 0.85rem;">Cancelar</button>
                             <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Aceitar e preparar</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Pedido #1047 (Data: 2026-11-03) -->
+                <!-- Pedido #1047 (Pronto) -->
                 <div class="order-card" data-status="pronto" data-data="2026-11-03">
                     <div class="order-header">
                         <div style="display: flex; align-items: center; gap: 12px;">
-                            <strong style="font-size: 1.1rem; color: #111;">Pedido #1047</strong>
-                            <span class="badge-status badge-pronto">● Pronto</span>
+                            <strong style="font-size: 1.1rem; color: #111;" class="ped-num">Pedido #1047</strong>
+                            <span class="badge-status badge-pronto ped-badge">● Pronto</span>
                         </div>
                         <span style="font-size: 0.85rem; color: #888;">03/11/2026 · 09:20</span>
                     </div>
                     <div class="order-body">
                         <div>
                             <span class="order-label">Cliente</span>
-                            <strong style="font-size: 0.95rem; color: #111; display: block;">João da Silva</strong>
+                            <strong style="font-size: 0.95rem; color: #111; display: block;" class="ped-cliente">João da Silva</strong>
                             <span style="font-size: 0.8rem; color: #666;">📞 (69) 99999-1234</span>
                         </div>
                         <div>
@@ -135,31 +135,31 @@
                         </div>
                         <div style="text-align: right;">
                             <span class="order-label">Total</span>
-                            <strong style="font-size: 1.3rem; color: #111;">R$ 74,00</strong>
+                            <strong style="font-size: 1.3rem; color: #111;" class="ped-total">R$ 74,00</strong>
                         </div>
                     </div>
                     <div class="order-footer">
-                        <span style="color: #555;">ℹ️ Pronto para retirada na loja</span>
-                        <div style="display: flex; gap: 8px;">
-                            <button class="btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Cancelar</button>
+                        <span style="color: #555;" class="ped-footer-text">ℹ️ Pronto para retirada na loja</span>
+                        <div style="display: flex; gap: 8px;" class="ped-actions">
+                            <button class="btn-secondary btn-cancelar-pedido" style="padding: 8px 16px; font-size: 0.85rem;">Cancelar</button>
                             <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Concluir pedido</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Pedido #1046 (Data: 2026-11-03) -->
+                <!-- Pedido #1046 (Preparando) -->
                 <div class="order-card" data-status="preparando" data-data="2026-11-03">
                     <div class="order-header">
                         <div style="display: flex; align-items: center; gap: 12px;">
-                            <strong style="font-size: 1.1rem; color: #111;">Pedido #1046</strong>
-                            <span class="badge-status badge-preparando">● Preparando</span>
+                            <strong style="font-size: 1.1rem; color: #111;" class="ped-num">Pedido #1046</strong>
+                            <span class="badge-status badge-preparando ped-badge">● Preparando</span>
                         </div>
                         <span style="font-size: 0.85rem; color: #888;">03/11/2026 · 08:55</span>
                     </div>
                     <div class="order-body">
                         <div>
                             <span class="order-label">Cliente</span>
-                            <strong style="font-size: 0.95rem; color: #111; display: block;">João da Silva</strong>
+                            <strong style="font-size: 0.95rem; color: #111; display: block;" class="ped-cliente">João da Silva</strong>
                             <span style="font-size: 0.8rem; color: #666;">📞 (69) 99999-1234</span>
                         </div>
                         <div>
@@ -174,31 +174,31 @@
                         </div>
                         <div style="text-align: right;">
                             <span class="order-label">Total</span>
-                            <strong style="font-size: 1.3rem; color: #111;">R$ 44,00</strong>
+                            <strong style="font-size: 1.3rem; color: #111;" class="ped-total">R$ 44,00</strong>
                         </div>
                     </div>
                     <div class="order-footer">
-                        <span style="color: #555;">ℹ️ Separe os itens e confira as quantidades</span>
-                        <div style="display: flex; gap: 8px;">
-                            <button class="btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Cancelar</button>
+                        <span style="color: #555;" class="ped-footer-text">ℹ️ Separe os itens e confira as quantidades</span>
+                        <div style="display: flex; gap: 8px;" class="ped-actions">
+                            <button class="btn-secondary btn-cancelar-pedido" style="padding: 8px 16px; font-size: 0.85rem;">Cancelar</button>
                             <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Marcar como pronto</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Pedido #1045 (Data: 2026-11-02 - Ontem / Últimos 7 dias / Mês atual) -->
+                <!-- Pedido #1045 (Concluído) -->
                 <div class="order-card" data-status="concluido" data-data="2026-11-02">
                     <div class="order-header">
                         <div style="display: flex; align-items: center; gap: 12px;">
-                            <strong style="font-size: 1.1rem; color: #111;">Pedido #1045</strong>
-                            <span class="badge-status badge-concluido">● Concluído</span>
+                            <strong style="font-size: 1.1rem; color: #111;" class="ped-num">Pedido #1045</strong>
+                            <span class="badge-status badge-concluido ped-badge">● Concluído</span>
                         </div>
                         <span style="font-size: 0.85rem; color: #888;">02/11/2026 · 14:30</span>
                     </div>
                     <div class="order-body">
                         <div>
                             <span class="order-label">Cliente</span>
-                            <strong style="font-size: 0.95rem; color: #111; display: block;">João da Silva</strong>
+                            <strong style="font-size: 0.95rem; color: #111; display: block;" class="ped-cliente">João da Silva</strong>
                             <span style="font-size: 0.8rem; color: #666;">📞 (69) 99999-1234</span>
                         </div>
                         <div>
@@ -213,28 +213,28 @@
                         </div>
                         <div style="text-align: right;">
                             <span class="order-label">Total</span>
-                            <strong style="font-size: 1.3rem; color: #111;">R$ 36,00</strong>
+                            <strong style="font-size: 1.3rem; color: #111;" class="ped-total">R$ 36,00</strong>
                         </div>
                     </div>
                     <div class="order-footer">
-                        <span style="color: #555;">✓ Pedido concluído · sem ações pendentes</span>
-                        <div></div>
+                        <span style="color: #555;" class="ped-footer-text">✓ Pedido concluído · sem ações pendentes</span>
+                        <div style="display: flex; gap: 8px;" class="ped-actions" style="display:none;"></div>
                     </div>
                 </div>
 
-                <!-- Pedido #1044 (Data: 2026-10-30 - Mês anterior ou fora dos 7 dias) -->
+                <!-- Pedido #1044 (Cancelado) -->
                 <div class="order-card" data-status="cancelado" data-data="2026-10-30">
                     <div class="order-header">
                         <div style="display: flex; align-items: center; gap: 12px;">
-                            <strong style="font-size: 1.1rem; color: #111;">Pedido #1044</strong>
-                            <span class="badge-status badge-cancelado">● Cancelado</span>
+                            <strong style="font-size: 1.1rem; color: #111;" class="ped-num">Pedido #1044</strong>
+                            <span class="badge-status badge-cancelado ped-badge">● Cancelado</span>
                         </div>
                         <span style="font-size: 0.85rem; color: #888;">30/10/2026 · 11:10</span>
                     </div>
                     <div class="order-body">
                         <div>
                             <span class="order-label">Cliente</span>
-                            <strong style="font-size: 0.95rem; color: #111; display: block;">João da Silva</strong>
+                            <strong style="font-size: 0.95rem; color: #111; display: block;" class="ped-cliente">João da Silva</strong>
                             <span style="font-size: 0.8rem; color: #666;">📞 (69) 99999-1234</span>
                         </div>
                         <div>
@@ -249,12 +249,12 @@
                         </div>
                         <div style="text-align: right;">
                             <span class="order-label">Total</span>
-                            <strong style="font-size: 1.3rem; color: #111;">R$ 26,00</strong>
+                            <strong style="font-size: 1.3rem; color: #111;" class="ped-total">R$ 26,00</strong>
                         </div>
                     </div>
                     <div class="order-footer">
-                        <span style="color: #b91c1c;">✕ Pedido cancelado · sem ações disponíveis</span>
-                        <div></div>
+                        <span style="color: #b91c1c;" class="ped-footer-text">✕ Pedido cancelado · sem ações disponíveis</span>
+                        <div style="display: flex; gap: 8px;" class="ped-actions" style="display:none;"></div>
                     </div>
                 </div>
 
@@ -262,10 +262,47 @@
         </main>
     </div>
 
-    <!-- Script de Filtros Integrados (Status + Período) -->
+    <!-- Modal de Confirmação de Cancelamento de Pedido -->
+    <div id="modal-cancelar-pedido" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: #fff; width: 100%; max-width: 480px; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative;">
+            
+            <!-- Botão Fechar (X) -->
+            <button id="btn-fechar-modal-pedido" style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #666;">✕</button>
+
+            <!-- Ícone de Alerta/Lixeira -->
+            <div style="width: 48px; height: 48px; background: #fdf2f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                <span style="font-size: 1.5rem;">❌</span>
+            </div>
+
+            <!-- Título e Descrição -->
+            <h3 style="font-size: 1.3rem; color: #111; margin-bottom: 8px;">Cancelar este pedido?</h3>
+            <p style="font-size: 0.9rem; color: #666; line-height: 1.4; margin-bottom: 20px;">
+                O pedido será marcado como cancelado e o cliente será notificado. Esta ação não pode ser desfeita.
+            </p>
+
+            <!-- Card de Pré-visualização do Pedido -->
+            <div style="background: #f9fafb; border: 1px solid #eee; border-radius: 8px; padding: 12px; display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+                <div style="width: 48px; height: 48px; background: #e0e0e0; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🛒</div>
+                <div>
+                    <strong id="modal-ped-num" style="font-size: 0.95rem; color: #111; display: block;">Pedido #0000</strong>
+                    <span id="modal-ped-info" style="font-size: 0.8rem; color: #666;">Cliente · R$ 0,00</span>
+                </div>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div style="display: flex; gap: 12px;">
+                <button id="btn-nao-cancelar" class="btn-secondary" style="flex: 1; text-align: center; padding: 10px;">Voltar</button>
+                <button id="btn-sim-cancelar" style="flex: 1; background-color: #c62828; color: #fff; border: none; padding: 10px; border-radius: 6px; font-weight: 600; cursor: pointer;">Sim, cancelar pedido</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script de Gestão de Pedidos, Filtros e Modal de Cancelamento -->
     <script>
         let periodoAtual = 'todos';
         let statusAtual = 'todos';
+        let cardParaCancelar = null;
 
         // Filtrar por Status (Abas)
         function filtrarStatus(status, elementoBtn) {
@@ -278,37 +315,28 @@
         // Selecionar Período no Dropdown
         function selecionarPeriodo(filtroPeriodo, nomeTexto) {
             const textoSpan = document.getElementById('texto-periodo-selecionado');
-            if (textoSpan) {
-                textoSpan.textContent = `📅 ${nomeTexto}`;
-            }
+            if (textoSpan) textoSpan.textContent = `📅 ${nomeTexto}`;
             const menu = document.getElementById('menu-periodo-opcoes');
-            if (menu) {
-                menu.style.display = 'none';
-            }
+            if (menu) menu.style.display = 'none';
             periodoAtual = filtroPeriodo;
             aplicarFiltrosCombinados();
         }
 
-        // Aplicar ambos os filtros simultaneamente (Status + Período)
+        // Aplicar Filtros Combinados (Status + Período)
         function aplicarFiltrosCombinados() {
             const cards = document.querySelectorAll('.order-card');
             let visiveis = 0;
-
-            // Simulando a data "Hoje" com base na sua imagem (ex: 2026-11-03)
-            // Você pode alterar esta string se quiser testar outro dia como "Hoje"
             const dataHojeStr = "2026-11-03"; 
             const hoje = new Date(dataHojeStr + "T00:00:00");
 
             cards.forEach(card => {
                 const cardStatus = card.getAttribute('data-status');
-                const cardDataStr = card.getAttribute('data-data'); // YYYY-MM-DD
+                const cardDataStr = card.getAttribute('data-data');
                 const cardData = new Date(cardDataStr + "T00:00:00");
 
-                // 1. Validar Filtro de Status
                 let passaStatus = (statusAtual === 'todos' || cardStatus === statusAtual);
-
-                // 2. Validar Filtro de Período
                 let passaPeriodo = true;
+
                 if (periodoAtual === 'hoje') {
                     passaPeriodo = (cardDataStr === dataHojeStr);
                 } else if (periodoAtual === '7dias') {
@@ -319,7 +347,6 @@
                     passaPeriodo = (cardData.getMonth() === hoje.getMonth() && cardData.getFullYear() === hoje.getFullYear());
                 }
 
-                // Mostrar ou esconder o card
                 if (passaStatus && passaPeriodo) {
                     card.style.display = 'block';
                     visiveis++;
@@ -328,28 +355,89 @@
                 }
             });
 
-            // Atualizar contador de pedidos visíveis
             const contador = document.getElementById('contador-pedidos');
-            if (contador) {
-                contador.textContent = `${visiveis} pedido${visiveis === 1 ? '' : 's'}`;
-            }
+            if (contador) contador.textContent = `${visiveis} pedido${visiveis === 1 ? '' : 's'}`;
         }
 
-        // Funções do Dropdown
+        // Dropdown de Períodos
         function toggleMenuPeriodo(event) {
             event.stopPropagation();
             const menu = document.getElementById('menu-periodo-opcoes');
-            if (menu) {
-                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-            }
+            if (menu) menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
         }
 
         window.addEventListener('click', () => {
             const menu = document.getElementById('menu-periodo-opcoes');
-            if (menu) {
-                menu.style.display = 'none';
-            }
+            if (menu) menu.style.display = 'none';
         });
+
+        // Configuração do Modal de Cancelamento de Pedido
+        const modalCancelar = document.getElementById('modal-cancelar-pedido');
+        const btnFecharModalPedido = document.getElementById('btn-fechar-modal-pedido');
+        const btnNaoCancelar = document.getElementById('btn-nao-cancelar');
+        const btnSimCancelar = document.getElementById('btn-sim-cancelar');
+        const modalPedNum = document.getElementById('modal-ped-num');
+        const modalPedInfo = document.getElementById('modal-ped-info');
+
+        function fecharModalCancelar() {
+            if (modalCancelar) modalCancelar.style.display = 'none';
+            cardParaCancelar = null;
+        }
+
+        if (btnFecharModalPedido) btnFecharModalPedido.onclick = fecharModalCancelar;
+        if (btnNaoCancelar) btnNaoCancelar.onclick = fecharModalCancelar;
+
+        // Ligar os botões de cancelar de cada card
+        function ativarBotoesCancelar() {
+            document.querySelectorAll('.btn-cancelar-pedido').forEach(btn => {
+                btn.onclick = function() {
+                    const card = this.closest('.order-card');
+                    cardParaCancelar = card;
+
+                    const num = card.querySelector('.ped-num')?.textContent || 'Pedido';
+                    const cliente = card.querySelector('.ped-cliente')?.textContent || 'Cliente';
+                    const total = card.querySelector('.ped-total')?.textContent || 'R$ 0,00';
+
+                    if (modalPedNum) modalPedNum.textContent = num;
+                    if (modalPedInfo) modalPedInfo.textContent = `${cliente} · ${total}`;
+
+                    if (modalCancelar) modalCancelar.style.display = 'flex';
+                };
+            });
+        }
+
+        // Confirmar o cancelamento efetivo
+        if (btnSimCancelar) {
+            btnSimCancelar.onclick = function() {
+                if (cardParaCancelar) {
+                    // Atualizar o status visual do card para Cancelado
+                    cardParaCancelar.setAttribute('data-status', 'cancelado');
+                    
+                    const badge = cardParaCancelar.querySelector('.ped-badge');
+                    if (badge) {
+                        badge.className = 'badge-status badge-cancelado ped-badge';
+                        badge.textContent = '● Cancelado';
+                    }
+
+                    const footerText = cardParaCancelar.querySelector('.ped-footer-text');
+                    if (footerText) {
+                        footerText.style.color = '#b91c1c';
+                        footerText.textContent = '✕ Pedido cancelado · sem ações disponíveis';
+                    }
+
+                    const actions = cardParaCancelar.querySelector('.ped-actions');
+                    if (actions) {
+                        actions.style.display = 'none'; // Remove os botões de ação
+                    }
+
+                    fecharModalCancelar();
+                    aplicarFiltrosCombinados();
+                }
+            };
+        }
+
+        // Inicializar os eventos ao carregar a página
+        ativarBotoesCancelar();
     </script>
 </body>
 </html>
