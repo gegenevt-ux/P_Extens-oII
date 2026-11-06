@@ -10,6 +10,7 @@
 <body>
 
     <div class="dashboard-container">
+        <!-- Menu Lateral (Sidebar) -->
         <aside class="sidebar">
             <!-- Topo: Logo -->
             <div class="logo-area">
@@ -22,7 +23,7 @@
 
             <!-- Meio: Menu de Navegação -->
             <nav class="nav-menu">
-                <a href="painel.html" class="nav-item">🎛️ Painel</a>
+                <a href="painel.html" class="nav-item active">🎛️ Painel</a>
                 <a href="produtos.html" class="nav-item">📦 Produtos</a>
                 <a href="pedidos.html" class="nav-item">📋 Pedidos</a>
                 <a href="comercio.html" class="nav-item">🏪 Meu comércio</a>
@@ -80,7 +81,7 @@
                 </div>
             </section>
 
-            <!-- 2. Alerta de Pedido Novo (Posicionado no Meio) -->
+            <!-- 2. Alerta de Pedido Novo (Abre o Modal de Conferência) -->
             <div style="background: #fff8f5; border: 1px solid #ffd8cc; border-radius: 12px; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; box-shadow: 0 2px 6px rgba(230,74,25,0.04);">
                 <div style="display: flex; align-items: center; gap: 16px;">
                     <div style="width: 44px; height: 44px; background: #ffe5dc; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
@@ -91,9 +92,9 @@
                         <p style="font-size: 0.85rem; color: #666; margin: 0;">Pedido #1048 · João da Silva · Entrega · R$ 82,00</p>
                     </div>
                 </div>
-                <a href="pedidos.html" class="btn-primary" style="text-decoration: none; padding: 10px 20px; font-size: 0.9rem; white-space: nowrap;">
+                <button onclick="abrirModalConferir()" class="btn-primary" style="border: none; padding: 10px 20px; font-size: 0.9rem; white-space: nowrap; cursor: pointer;">
                     Conferir pedido
-                </a>
+                </button>
             </div>
 
             <!-- 3. Seção de Pedidos Recentes -->
@@ -144,6 +145,134 @@
         </main>
     </div>
 
-    <script src="js/main.js"></script>
+    <!-- Modal de Conferir Pedido -->
+    <div id="modal-conferir-pedido" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: #fff; width: 100%; max-width: 500px; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative;">
+            <button onclick="fecharModalConferir()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #666;">✕</button>
+            
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+                <h3 style="font-size: 1.3rem; color: #111;">Detalhes do Pedido #1048</h3>
+                <span class="badge-status badge-pendente">● Pendente</span>
+            </div>
+            <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">Recebido em 03/11/2026 às 10:42</p>
+
+            <!-- Informações do Cliente -->
+            <div style="background: #f9fafb; border: 1px solid #eee; border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+                <span style="font-size: 0.75rem; color: #888; text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 4px;">Cliente</span>
+                <strong style="font-size: 0.95rem; color: #111; display: block;">João da Silva</strong>
+                <span style="font-size: 0.85rem; color: #555;">📞 (69) 99999-1234</span>
+            </div>
+
+            <!-- Itens do Pedido -->
+            <div style="background: #f9fafb; border: 1px solid #eee; border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+                <span style="font-size: 0.75rem; color: #888; text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 6px;">Itens</span>
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 4px;">
+                    <span>2 × Carvão vegetal 5 kg</span>
+                    <span style="font-weight: 600;">R$ 60,00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                    <span>1 × Carvão vegetal 3 kg</span>
+                    <span style="font-weight: 600;">R$ 14,00</span>
+                </div>
+            </div>
+
+            <!-- Endereço e Valores -->
+            <div style="background: #f9fafb; border: 1px solid #eee; border-radius: 8px; padding: 14px; margin-bottom: 20px; font-size: 0.9rem;">
+                <div style="margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: #888; text-transform: uppercase; font-weight: 600; display: block;">Entrega</span>
+                    <span style="color: #333;">Rua dos Ipês, 245 · Aponiã · Porto Velho/RO</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.85rem; border-top: 1px solid #eee; padding-top: 8px;">
+                    <span>Subtotal: R$ 74,00 | Taxa: R$ 8,00</span>
+                    <strong style="font-size: 1.1rem; color: #111;">Total: R$ 82,00</strong>
+                </div>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div style="display: flex; gap: 12px;">
+                <button onclick="fecharModalConferir()" class="btn-secondary" style="flex: 1; text-align: center; padding: 10px;">Fechar</button>
+                <button onclick="aceitarPedidoPainel()" class="btn-primary" style="flex: 1; text-align: center; padding: 10px; border: none; cursor: pointer;">Aceitar e preparar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de Notificação Popup -->
+    <div id="toast-notificacao" style="display: none; position: fixed; bottom: 24px; right: 24px; background: #111; color: #fff; padding: 14px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1100; font-size: 0.9rem; align-items: center; gap: 10px; animation: slideUp 0.3s ease;">
+        <span id="toast-icone">✅</span>
+        <span id="toast-mensagem">Ação realizada com sucesso!</span>
+    </div>
+
+    <script>
+        function mostrarToast(mensagem, icone = '✅') {
+            const toast = document.getElementById('toast-notificacao');
+            const msgEl = document.getElementById('toast-mensagem');
+            const iconeEl = document.getElementById('toast-icone');
+
+            if (toast && msgEl && iconeEl) {
+                msgEl.textContent = mensagem;
+                iconeEl.textContent = icone;
+                toast.style.display = 'flex';
+
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        function abrirModalConferir() {
+            const modal = document.getElementById('modal-conferir-pedido');
+            if (modal) modal.style.display = 'flex';
+        }
+
+        function fecharModalConferir() {
+            const modal = document.getElementById('modal-conferir-pedido');
+            if (modal) modal.style.display = 'none';
+        }
+
+        function aceitarPedidoPainel() {
+            fecharModalConferir();
+            mostrarToast('Pedido aceito e enviado para preparação!', '🔄');
+        }
+    </script>
+
+        <!-- Toast de Notificação Popup -->
+    <div id="toast-notificacao" style="display: none; position: fixed; bottom: 24px; right: 24px; background: #111; color: #fff; padding: 14px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1100; font-size: 0.9rem; align-items: center; gap: 10px; animation: slideUp 0.3s ease;">
+        <span id="toast-icone">✅</span>
+        <span id="toast-mensagem">Ação realizada com sucesso!</span>
+    </div>
+
+    <script>
+        function mostrarToast(mensagem, icone = '✅') {
+            const toast = document.getElementById('toast-notificacao');
+            const msgEl = document.getElementById('toast-mensagem');
+            const iconeEl = document.getElementById('toast-icone');
+
+            if (toast && msgEl && iconeEl) {
+                msgEl.textContent = mensagem;
+                iconeEl.textContent = icone;
+                toast.style.display = 'flex';
+
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        function abrirModalConferir() {
+            const modal = document.getElementById('modal-conferir-pedido');
+            if (modal) modal.style.display = 'flex';
+        }
+
+        function fecharModalConferir() {
+            const modal = document.getElementById('modal-conferir-pedido');
+            if (modal) modal.style.display = 'none';
+        }
+
+        function aceitarPedidoPainel() {
+            fecharModalConferir();
+            mostrarToast('Pedido aceito e enviado para preparação!', '🔄');
+            // Opcional: aqui você pode atualizar o alerta da tela se desejar
+        }
+    </script>
 </body>
 </html>
