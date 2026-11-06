@@ -1,0 +1,130 @@
+/* =========================================================
+   BASE.CSS — a "fundação" de todas as telas do cliente
+   ---------------------------------------------------------
+   Aqui ficam só coisas que se repetem em TODAS as páginas:
+   cores, fonte, espaçamentos, botões e etiquetas (badges).
+   Mudou a cor da marca? Muda em UM lugar só (no :root).
+   ========================================================= */
+
+/* 1. TOKENS — as "variáveis" do design, tiradas do protótipo */
+:root {
+  /* Cores da marca */
+  --laranja: #C8440A;        /* botões, preços, links */
+  --laranja-escuro: #A8380A; /* hover dos botões */
+  --laranja-claro: #FF8A4C;  /* destaque no fundo escuro */
+  --carvao: #161512;         /* fundo do hero, rodapé, texto principal */
+
+  /* Neutros */
+  --fundo: #F5F3EE;          /* fundo bege da página */
+  --branco: #FFFFFF;
+  --foto: #EFEBE2;           /* fundo das fotos de produto */
+  --borda: #E6E1D6;
+  --texto: #161512;
+  --texto-suave: #6B675F;
+  --texto-no-escuro: #D8D3C8;
+
+  /* Status (badges) */
+  --verde-fundo: #E3F1E0;
+  --verde-texto: #2E6B2E;
+  --vermelho-fundo: #FBE3DE;
+  --vermelho-texto: #A3260F;
+
+  /* Medidas */
+  --raio: 16px;              /* cantos arredondados dos cards */
+  --raio-botao: 10px;
+  --largura-max: 1200px;     /* largura máxima do conteúdo */
+  --sombra: 0 1px 2px rgba(22, 21, 18, .04);
+  --sombra-hover: 0 12px 28px rgba(22, 21, 18, .10);
+}
+
+/* 2. RESET — zera os estilos padrão do navegador */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', Arial, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+/* 3. CONTAINER — centraliza o conteúdo e dá respiro nas laterais */
+.container {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+@media (min-width: 768px) {
+  .container { padding: 0 32px; }
+}
+
+/* 4. TEXTOS REUTILIZÁVEIS */
+.sobretitulo {               /* o "NOSSA SELEÇÃO" pequeno acima dos títulos */
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--laranja);
+}
+
+.preco {
+  font-weight: 700;
+  color: var(--laranja);
+}
+
+/* 5. BOTÕES — uma classe base + variações (modificadores) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;          /* altura mínima boa para o dedo no celular */
+  padding: 0 28px;
+  border: 2px solid transparent;
+  border-radius: var(--raio-botao);
+  background: var(--laranja);
+  color: var(--branco);
+  font-weight: 700;
+  font-size: 16px;
+  transition: background .2s, transform .2s, border-color .2s;
+}
+.btn:hover { background: var(--laranja-escuro); }
+.btn:active { transform: scale(.97); }  /* "afunda" ao clicar: feedback de toque */
+
+.btn-contorno {              /* "Criar conta" no fundo escuro */
+  background: transparent;
+  border-color: var(--branco);
+}
+.btn-contorno:hover { background: rgba(255, 255, 255, .1); }
+
+.btn-branco {                /* "Entrar ou cadastrar-se" na faixa laranja */
+  background: var(--branco);
+  color: var(--laranja);
+}
+.btn-branco:hover { background: var(--fundo); }
+
+.btn-pilula { border-radius: 999px; min-height: 44px; padding: 0 24px; }
+.btn-grande { min-height: 56px; font-size: 17px; }
+
+/* Foco visível para quem navega pelo teclado (acessibilidade) */
+.btn:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--laranja-claro);
+  outline-offset: 3px;
+}
+
+/* 6. BADGES — etiquetas "Disponível" / "Indisponível" */
+.badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.badge-disponivel   { background: var(--verde-fundo);    color: var(--verde-texto); }
+.badge-indisponivel { background: var(--vermelho-fundo); color: var(--vermelho-texto); }
