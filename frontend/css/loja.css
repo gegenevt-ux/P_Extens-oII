@@ -1,0 +1,220 @@
+/* =========================================================
+   LOJA.CSS — componentes das telas do CLIENTE
+   (o style.css continua sendo só do painel do Pedro)
+   Organizado na mesma ordem em que aparecem na tela.
+   ========================================================= */
+
+/* ---------- CABEÇALHO ---------- */
+.cabecalho {
+  position: sticky;          /* gruda no topo ao rolar */
+  top: 0;
+  z-index: 10;
+  background: var(--carvao);
+  color: var(--branco);
+}
+.cabecalho-conteudo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 76px;
+}
+.cabecalho .logo img { width: 150px; height: auto; }
+
+.menu {
+  display: flex;
+  gap: 36px;
+}
+.menu a {
+  position: relative;
+  padding: 26px 0;
+  color: var(--texto-no-escuro);
+  font-weight: 500;
+  transition: color .2s;
+}
+.menu a:hover { color: var(--branco); }
+
+/* Item da página atual: branco + risquinho laranja embaixo */
+.menu a[aria-current="page"] { color: var(--branco); font-weight: 700; }
+.menu a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: var(--laranja-claro);
+}
+
+/* No celular o menu desce para uma 2ª linha (sem precisar de JS) */
+@media (max-width: 767px) {
+  .cabecalho-conteudo { flex-wrap: wrap; min-height: 64px; padding-top: 10px; }
+  .cabecalho .logo img { width: 130px; }
+  .menu {
+    order: 3;                /* joga o menu para depois do botão Entrar */
+    width: 100%;
+    gap: 24px;
+    overflow-x: auto;        /* se não couber, rola de lado */
+  }
+  .menu a { padding: 12px 0; white-space: nowrap; }
+}
+
+/* ---------- HERO (a "vitrine" escura do topo) ---------- */
+.hero {
+  background: var(--carvao);
+  color: var(--branco);
+  padding: 48px 0 96px;      /* 96px embaixo: espaço p/ a faixa de benefícios "subir" */
+}
+.hero-grade {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+.hero h1 {
+  margin: 16px 0 24px;
+  font-size: clamp(40px, 7vw, 76px);  /* cresce com a tela, entre 40 e 76px */
+  line-height: 1.02;
+  letter-spacing: -1.5px;
+}
+.hero h1 span { color: var(--laranja-claro); }
+.hero .sobretitulo { color: var(--laranja-claro); }
+.hero-texto {
+  max-width: 520px;
+  font-size: 19px;
+  color: var(--texto-no-escuro);
+}
+.hero-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 36px 0 20px;
+}
+.hero-nota { font-size: 14px; color: #A9A396; }
+.hero-imagem {
+  border-radius: 24px;
+  overflow: hidden;
+  aspect-ratio: 23 / 20;     /* mantém a proporção da imagem */
+}
+.hero-imagem img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (min-width: 900px) {
+  .hero { padding: 64px 0 120px; }
+  .hero-grade { grid-template-columns: 1.15fr 1fr; }
+}
+
+/* ---------- FAIXA DE BENEFÍCIOS ---------- */
+.beneficios {
+  display: grid;
+  list-style: none;          /* tira as bolinhas da <ul> */
+  margin-top: -48px;         /* o "pulo do gato": sobe por cima do hero */
+  position: relative;
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+.beneficio { padding: 22px 28px; }
+.beneficio + .beneficio { border-top: 1px solid var(--borda); }
+.beneficio strong { display: block; font-size: 18px; }
+.beneficio span { color: var(--texto-suave); font-size: 15px; }
+
+@media (min-width: 768px) {
+  .beneficios { grid-template-columns: repeat(3, 1fr); }
+  .beneficio + .beneficio { border-top: 0; border-left: 1px solid var(--borda); }
+}
+
+/* ---------- SEÇÃO DE PRODUTOS ---------- */
+.secao { padding: 64px 0; }
+.secao-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.secao-topo h2 {
+  margin-top: 8px;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -.5px;
+}
+.link-seta {
+  color: var(--laranja);
+  font-weight: 700;
+}
+.link-seta:hover { text-decoration: underline; }
+
+/* Grade responsiva: cabe quantos cards de 280px couberem */
+.grade-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* ---------- CARD DE PRODUTO (reutilizado na lista também) ---------- */
+.card-produto {
+  display: flex;
+  flex-direction: column;
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  overflow: hidden;          /* faz a foto respeitar o canto arredondado */
+  box-shadow: var(--sombra);
+  transition: transform .25s, box-shadow .25s;
+}
+.card-produto:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-hover);
+}
+.card-produto-foto {
+  aspect-ratio: 7 / 4;
+  background: var(--foto);
+}
+.card-produto-foto img { width: 100%; height: 100%; object-fit: cover; }
+.card-produto-info { padding: 20px 24px 24px; }
+.card-produto-detalhe {
+  margin: 12px 0 2px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+.card-produto h3 { font-size: 24px; line-height: 1.2; }
+.card-produto .preco { margin-top: 14px; font-size: 26px; }
+
+/* Indisponível: foto apagadinha, mas o card continua clicável p/ ver detalhes */
+.card-produto.indisponivel .card-produto-foto img { filter: grayscale(1); opacity: .6; }
+
+/* ---------- FAIXA DE CHAMADA (CTA laranja) ---------- */
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 40px 28px;
+  border-radius: 24px;
+  background: var(--laranja);
+  color: var(--branco);
+}
+.cta h2 { font-size: clamp(26px, 3.5vw, 36px); line-height: 1.15; max-width: 520px; }
+.cta p { margin-top: 10px; font-size: 18px; max-width: 660px; opacity: .95; }
+@media (min-width: 768px) { .cta { padding: 48px 56px; } }
+
+/* ---------- RODAPÉ ---------- */
+.rodape {
+  margin-top: 64px;
+  padding: 48px 0;
+  background: var(--carvao);
+  color: var(--texto-no-escuro);
+  font-size: 15px;
+}
+.rodape-conteudo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+}
+.rodape strong { display: block; color: var(--branco); font-size: 18px; letter-spacing: .5px; }
+.rodape address { font-style: normal; }
+@media (min-width: 768px) { .rodape address { text-align: right; } }
